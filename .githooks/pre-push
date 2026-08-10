@@ -1,0 +1,2 @@
+#!/bin/sh
+pwsh -NoProfile -File "$(git rev-parse --show-toplevel)/scripts/verify-public-identity.ps1"

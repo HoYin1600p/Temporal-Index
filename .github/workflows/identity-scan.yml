@@ -1,0 +1,16 @@
+name: Public identity scan
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Verify public identity
+        shell: pwsh
+        run: ./scripts/verify-public-identity.ps1
