@@ -1,0 +1,13 @@
+{
+  "item.temporal_index.temporal_index": "Temporal Index",
+  "container.temporal_index.temporal_index": "Temporal Index",
+  "tooltip.temporal_index.contents": "Contents (%s total):",
+  "tooltip.temporal_index.content_entry": "  %s × %s",
+  "tooltip.temporal_index.shard_name": "Temporal Shard",
+  "tooltip.temporal_index.selected": "Selected: %s × %s",
+  "tooltip.temporal_index.exact_quantity": "Quantity: %s",
+  "tooltip.temporal_index.empty": "Empty",
+  "tooltip.temporal_index.controls": "Sneak + scroll to select; right-click to use",
+  "message.temporal_index.identification_failed": "The temporal shard failed to reveal a relic.",
+  "message.temporal_index.relic_preserved": "The generated relic could not be stored and was dropped nearby."
+}

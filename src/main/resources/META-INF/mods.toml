@@ -24,3 +24,10 @@ mandatory=true
 versionRange="${minecraft_version_range}"
 ordering="NONE"
 side="BOTH"
+
+[[dependencies.${mod_id}]]
+modId="the_vault"
+mandatory=true
+versionRange="[0,)"
+ordering="AFTER"
+side="BOTH"

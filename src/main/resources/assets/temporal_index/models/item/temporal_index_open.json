@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "temporal_index:item/temporal_index_open"
+  }
+}
