@@ -34,7 +34,7 @@ Temporal Index has no runtime dependency on Wold's Vaults, Fruit Sac, Sophistica
 ## Installation
 
 1. Install Minecraft 1.18.2, Forge 40.3.11, and a compatible Vault Hunters pack.
-2. Download `temporal_index-1.0.0.jar` from the GitHub release.
+2. Download `temporal_index-1.0.1.jar` from the GitHub release.
 3. Place the JAR in the pack's `mods` directory on both the client and server.
 4. Start the game and confirm that **Temporal Index** appears in Forge's Mods screen.
 
@@ -60,7 +60,7 @@ See [Usage and behavior](docs/usage.md) for slot layout, pickup order, overflow 
 
 ## Compatibility
 
-Version 1.0.0 was compiled against every distinct active Vault Hunters JAR found in the CMA test instances and was tested in CMA Remastered inside a generated Vault. See [Vault compatibility verification](docs/compatibility.md) for the tested matrix and repeatable verification command.
+Version 1.0.0 was compiled against every distinct active Vault Hunters JAR found in the CMA test instances and was tested in CMA Remastered inside a generated Vault. Version 1.0.1 was additionally tested with Wold's Vaults 0.32.3 and 0.33.1 while retaining a Vault-only runtime dependency. See [Vault compatibility verification](docs/compatibility.md) for the tested matrix and repeatable verification command.
 
 Vault Hunters remains authoritative for:
 
@@ -78,7 +78,7 @@ Clone the repository, use Java 17, and provide a local `the_vault` JAR:
 .\gradlew.bat build -Pvault_mod_jar="X:\path\to\the_vault.jar"
 ```
 
-The build also discovers Vault Hunters in a small set of local Prism development instances when no override is supplied. The distributable JAR is written to `build/libs/temporal_index-1.0.0.jar`.
+The build also discovers Vault Hunters in a small set of local Prism development instances when no override is supplied. The distributable JAR is written to `build/libs/temporal_index-1.0.1.jar`.
 
 For development guidelines, see [CONTRIBUTING.md](CONTRIBUTING.md).
 
@@ -89,6 +89,7 @@ For development guidelines, see [CONTRIBUTING.md](CONTRIBUTING.md).
 - [Compatibility verification](docs/compatibility.md)
 - [Client/server safety](docs/server-safety.md)
 - [Reference behavior findings](docs/reference-findings.md)
+- [Version 1.0.1 release notes](docs/releases/1.0.1.md)
 - [Version 1.0.0 release notes](docs/releases/1.0.0.md)
 - [Changelog](CHANGELOG.md)
 - [Placeholder art notes](art/placeholder/README.md)

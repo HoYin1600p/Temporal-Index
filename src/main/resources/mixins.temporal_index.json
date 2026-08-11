@@ -6,7 +6,6 @@
   "refmap": "mixins.temporal_index.refmap.json",
   "mixins": [
     "PlayerInventoryMixin",
-    "TemporalShardStateMixin",
     "TemporalShardItemMixin"
   ],
   "client": [

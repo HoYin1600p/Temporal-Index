@@ -6,6 +6,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+## [1.0.1] - 2026-08-10
+
+### Wolds Comparability Pass
+
+- Made lightweight temporal-relic state handling compose safely with Wold's Vaults instead of competing with its `TemporalShardItem` method overwrite.
+- Preserved Wold's Vaults as an optional mod: Temporal Index still requires only Vault Hunters and does not import or call Wold's code.
+- Verified Wold's Vaults 0.33.1 shard generation end to end and verified conflict-free startup with Wold's Vaults 0.32.3.
+
 ## [1.0.0] - 2026-08-10
 
 ### Added
@@ -31,5 +39,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 - Book textures and models are functional placeholder assets intended to be replaced by commissioned artwork.
 - Compatibility depends on Vault Hunters' temporal item interfaces remaining compatible with the tested builds.
 
-[Unreleased]: https://github.com/HoYin1600p/Temporal-Index/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/HoYin1600p/Temporal-Index/compare/v1.0.1...HEAD
+[1.0.1]: https://github.com/HoYin1600p/Temporal-Index/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/HoYin1600p/Temporal-Index/releases/tag/v1.0.0

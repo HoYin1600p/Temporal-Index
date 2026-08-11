@@ -19,6 +19,20 @@ For the 1.0.0 release on 2026-08-10, the source compiled successfully against ev
 
 The installed `temporal_shard.json` configurations were also inspected. All five use the same ordered set of 16 modifier IDs expected by the book. Durations differ between modifiers in the two CMA Wolds configurations; the book retains the Vault-generated duration with each stored modifier instead of replacing it with a hard-coded duration.
 
+## Optional Wold's Vaults compatibility
+
+The 1.0.1 release was checked against every Wold's Vaults generation currently represented by the CMA instances:
+
+| CMA instance | Wold's Vaults build | Vault build | Verification |
+| --- | --- | --- | --- |
+| CMA Wolds 0.33.0 | 0.33.1 | 3.21.6.6884 | Full client test: both mods loaded, the Index opened in survival, and using a shard changed its count from 5 to 4 while Wold's generated and identified a Daycare relic that routed into reserved slot 15. |
+| CMA Wolds 0.32.2 | 0.32.3 | 3.21.5.6573 | Client startup test: both mods loaded and both temporal-shard mixins applied without an overwrite conflict or mixin application error. |
+| CMA Asgard | 0.23.4 standalone | 3.21.62 | API compilation passed. This older Wold's build does not patch `TemporalShardItem`, so it has no temporal-method collision with the Index. |
+
+Modern Wold's Vaults supplies its own temporal-shard state, identification, and loot behavior. Temporal Index handles its compact `identified` marker through a cancellable injection with lower mixin priority, allowing Wold's implementation to remain authoritative for every other stack. No Wold's class is imported, referenced, or required at runtime.
+
+The 0.33.1 functional test also confirms that Temporal Index does not replace, predict, or undo the Wold's/Vault temporal loot roll. It accepts the generated relic only after the owning mod has created and identified it.
+
 ## Dedicated-server verification
 
 The 1.0.0 release JAR was loaded through Forge's dedicated game-test server target with no Wold's Vaults dependency. The verification environment used Minecraft 1.18.2, Vault Hunters 3.20.3.6055, Java 17, and Forge 40.3.12, which is inside the declared `[40.3.11,41)` compatibility range.

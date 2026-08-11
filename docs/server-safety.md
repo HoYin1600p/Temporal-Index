@@ -2,6 +2,8 @@
 
 Temporal Index must be installed on both the client and server. The mod is not client-only, and its `the_vault` dependency is mandatory on both sides.
 
+Wold's Vaults remains optional on both sides. When it is installed, the 1.0.1 temporal-state compatibility injection composes with Wold's own common mixin without importing a Wold's class or moving any authority to the client. The dedicated-server lifecycle test below remains a Vault-only test; it demonstrates Temporal Index's own distribution safety rather than making a claim about the server-side behavior of an optional Wold's build.
+
 ## Side separation
 
 Client-only code is limited to the `com.hoyin1600p.temporalindex.client` package, the container screen, and the client GUI mixin.
