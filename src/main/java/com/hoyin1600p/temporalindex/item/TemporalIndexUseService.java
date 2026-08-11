@@ -6,9 +6,11 @@ import com.hoyin1600p.temporalindex.storage.TemporalIndexStorage;
 import com.hoyin1600p.temporalindex.storage.TemporalRelics;
 import iskallia.vault.gear.item.IdentifiableItem;
 import iskallia.vault.init.ModItems;
+import iskallia.vault.init.ModSounds;
 import iskallia.vault.item.gear.TemporalShardItem;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.ItemStack;
 
@@ -66,6 +68,14 @@ public final class TemporalIndexUseService {
             }
             activeBook.extractItem(TemporalIndexStorage.SHARD_SLOT, 1, false);
         }
+        player.level.playSound(
+                null,
+                player.blockPosition(),
+                ModSounds.IDENTIFICATION_SFX,
+                SoundSource.PLAYERS,
+                0.3F,
+                1.0F
+        );
         return true;
     }
 

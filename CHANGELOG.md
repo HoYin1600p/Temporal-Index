@@ -6,6 +6,32 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+## [1.0.2] - 2026-08-11
+
+### Render calibration tooling
+
+- Added an independent JSON transform table covering all 17 temporal entries and four render contexts per entry.
+- Added independent global book-model translation and rotation for first person, third person, dropped item, and item frame views.
+- Added temporary, unbound calibration tooling with a mostly transparent, non-pausing layout; book/icon target selection; item/context dropdowns; sliders; numeric translation/rotation fields; and a live face-on book preview.
+- Removed hard-coded per-sprite transform values; cover sprites now resolve translation X/Y/Z and rotation X/Y/Z from JSON.
+- Promoted the finalized Lunar transforms to the packaged defaults for all 16 relic icons, retained separate finalized Temporal Shard transforms, and added the finalized book transforms for all four views.
+
+### Added
+
+- Temporal Shards activated from the Index now play The Vault's completed-identification sound without replaying the rolling sequence.
+- Added a shaped 3×3 survival recipe using four Pogs, four Vault Essences, and one Temporal Shard.
+
+### Changed
+
+- Left the temporary render calibration menu in the mod but removed its default F8 assignment; **Open Render Calibration** can still be assigned from Minecraft's Controls menu.
+
+### Fixed
+
+- Removed a mandatory mixin injection into Vault's inherited `TemporalShardItem.getState` method that prevented Remastered build 6909 from starting; compact relic names are now resolved by Temporal Index without replacing Vault or Wold's state behavior.
+- Centered the closed book on the third-person held-item transform so it remains in the player's hand.
+- Mirrored the item-frame cover-sprite rotation so it matches the established first-person orientation.
+- Restricted the selected relic or shard sprite to the front cover so it no longer renders through the back of the book.
+
 ## [1.0.1] - 2026-08-10
 
 ### Wolds Comparability Pass
@@ -39,6 +65,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 - Book textures and models are functional placeholder assets intended to be replaced by commissioned artwork.
 - Compatibility depends on Vault Hunters' temporal item interfaces remaining compatible with the tested builds.
 
-[Unreleased]: https://github.com/HoYin1600p/Temporal-Index/compare/v1.0.1...HEAD
+[Unreleased]: https://github.com/HoYin1600p/Temporal-Index/compare/v1.0.2...HEAD
+[1.0.2]: https://github.com/HoYin1600p/Temporal-Index/compare/v1.0.1...v1.0.2
 [1.0.1]: https://github.com/HoYin1600p/Temporal-Index/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/HoYin1600p/Temporal-Index/releases/tag/v1.0.0

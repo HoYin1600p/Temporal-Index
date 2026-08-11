@@ -40,9 +40,17 @@ Temporal Index has no runtime dependency on Wold's Vaults, Fruit Sac, Sophistica
 
 Back up a world before adding or updating any mod. Do not remove Temporal Index while Index items containing stored relics still exist in a world.
 
-## Using the Index
+## Crafting
 
-The 1.0.0 release intentionally has no survival recipe. For testing or pack integration, obtain it from the creative inventory or run:
+Craft the Temporal Index with four Pogs, four Vault Essences, and one Temporal Shard:
+
+```text
+P E P
+E S E
+P E P
+```
+
+`P` is a Pog, `E` is Vault Essence, and `S` is a Temporal Shard. For testing or pack integration, obtain the Index from the creative inventory or run:
 
 ```text
 /give @s temporal_index:temporal_index
@@ -78,7 +86,29 @@ Clone the repository, use Java 17, and provide a local `the_vault` JAR:
 .\gradlew.bat build -Pvault_mod_jar="X:\path\to\the_vault.jar"
 ```
 
-The build also discovers Vault Hunters in a small set of local Prism development instances when no override is supplied. The distributable JAR is written to `build/libs/temporal_index-1.0.1.jar`.
+The build also discovers Vault Hunters in a small set of local Prism development instances when no override is supplied. The current development JAR is written to `build/libs/temporal_index-1.0.2.jar`.
+
+### Temporary render calibration editor
+
+Development builds currently include a temporary in-game calibration screen. Its **Open Render Calibration** control is unbound by default; assign it under Minecraft's Controls menu when needed. The screen provides:
+
+- a mostly transparent, non-pausing layout that keeps the world visible behind the controls;
+- a target selector for calibrating either the cover icon or the book model itself;
+- an item dropdown containing the Temporal Shard and all 16 temporal relics;
+- a render-context dropdown for first person, third person, dropped item, and item frame;
+- sliders and precise numeric fields for translation X/Y/Z and rotation X/Y/Z;
+- a face-on book preview that follows the selected item and context while values change;
+- live in-memory updates, JSON reload, per-context reset, and explicit save controls.
+
+Saved values are written to:
+
+```text
+config/temporal_index/item_render_transforms.json
+```
+
+The renderer loads this JSON through `TemporalIndexRenderTransformConfig`; it does not call or depend on the temporary calibration screen. The global `book` object and each logical item have four independent context objects. Every context contains `translation` and `rotation` objects with `x`, `y`, and `z` values. Translation is measured in item-model units and rotation is measured in degrees. Book transforms move the complete book-and-icon assembly; item transforms then position the selected icon relative to the book cover. The packaged default file is at `assets/temporal_index/config/item_render_transforms.json`.
+
+The unbound calibration keybinding and screen are development tooling and will be removed after final values are established. The JSON loader and renderer integration are intended to remain.
 
 For development guidelines, see [CONTRIBUTING.md](CONTRIBUTING.md).
 

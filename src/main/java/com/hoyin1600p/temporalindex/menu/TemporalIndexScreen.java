@@ -1,5 +1,6 @@
 package com.hoyin1600p.temporalindex.menu;
 
+import com.hoyin1600p.temporalindex.storage.TemporalRelics;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -65,17 +66,21 @@ public final class TemporalIndexScreen extends AbstractContainerScreen<TemporalI
         }
 
         ItemStack hovered = hoveredSlot.getItem();
-        if (!(hoveredSlot instanceof TemporalIndexSlot)
-                || hovered.getCount() < TemporalIndexSlot.COMPACT_COUNT_THRESHOLD) {
+        if (!(hoveredSlot instanceof TemporalIndexSlot)) {
             renderTooltip(poseStack, hovered, mouseX, mouseY);
             return;
         }
 
         List<Component> lines = new ArrayList<>(getTooltipFromItem(hovered));
-        lines.add(new TranslatableComponent(
-                "tooltip.temporal_index.exact_quantity",
-                hovered.getCount()
-        ).withStyle(ChatFormatting.GOLD));
+        if (!lines.isEmpty() && TemporalRelics.findDefinition(hovered) >= 0) {
+            lines.set(0, TemporalRelics.getIndexDisplayName(hovered));
+        }
+        if (hovered.getCount() >= TemporalIndexSlot.COMPACT_COUNT_THRESHOLD) {
+            lines.add(new TranslatableComponent(
+                    "tooltip.temporal_index.exact_quantity",
+                    hovered.getCount()
+            ).withStyle(ChatFormatting.GOLD));
+        }
         renderTooltip(poseStack, lines, hovered.getTooltipImage(), mouseX, mouseY, hovered);
     }
 

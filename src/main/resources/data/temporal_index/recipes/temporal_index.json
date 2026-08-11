@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PEP",
+    "ESE",
+    "PEP"
+  ],
+  "key": {
+    "P": {
+      "item": "the_vault:gem_pog"
+    },
+    "E": {
+      "item": "the_vault:vault_essence"
+    },
+    "S": {
+      "item": "the_vault:temporal_shard"
+    }
+  },
+  "result": {
+    "item": "temporal_index:temporal_index",
+    "count": 1
+  }
+}

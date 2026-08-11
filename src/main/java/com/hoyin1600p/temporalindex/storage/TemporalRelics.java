@@ -6,6 +6,7 @@ import iskallia.vault.init.ModItems;
 import iskallia.vault.item.gear.TemporalShardItem;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
@@ -77,11 +78,15 @@ public final class TemporalRelics {
             return new TranslatableComponent("tooltip.temporal_index.shard_name");
         }
 
-        Component hoverName = stack.getHoverName();
-        if (findDefinition(stack) < 0) {
-            return hoverName;
+        if (findDefinition(stack) >= 0) {
+            var modifier = TemporalShardItem.getVaultModifier(stack);
+            if (modifier != null) {
+                return new TextComponent(modifier.getDisplayName())
+                        .setStyle(Style.EMPTY.withColor(modifier.getDisplayTextColor()));
+            }
         }
 
+        Component hoverName = stack.getHoverName();
         String displayName = hoverName.getString();
         int separator = displayName.indexOf(": ");
         String specificName = separator >= 0 ? displayName.substring(separator + 2) : displayName;
