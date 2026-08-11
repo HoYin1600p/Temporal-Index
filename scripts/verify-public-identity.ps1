@@ -29,6 +29,28 @@ function Invoke-GitScan {
 
 Invoke-GitScan -Category 'tracked content' -Arguments @('grep', '-I', '-n', '-i', '-e', $blockedName, '--', '.')
 Invoke-GitScan -Category 'tracked path' -Arguments @('ls-files')
+
+$untrackedFiles = @(& git ls-files --others --exclude-standard)
+if ($LASTEXITCODE -ne 0) {
+    throw 'Unable to list untracked files.'
+}
+Add-Failure -Category 'untracked path' -Lines @(
+    $untrackedFiles |
+        Select-String -SimpleMatch -Pattern $blockedName -CaseSensitive:$false |
+        ForEach-Object Line
+)
+foreach ($untrackedFile in $untrackedFiles) {
+    $file = Get-Item -LiteralPath $untrackedFile -ErrorAction Stop
+    if ($file.Length -gt 10MB) {
+        continue
+    }
+
+    $content = [System.IO.File]::ReadAllText($file.FullName)
+    if ($content.Contains($blockedName, [System.StringComparison]::OrdinalIgnoreCase)) {
+        Add-Failure -Category 'untracked content' -Lines @($untrackedFile)
+    }
+}
+
 & git rev-parse --verify HEAD *> $null
 if ($LASTEXITCODE -eq 0) {
     Invoke-GitScan -Category 'history metadata' -Arguments @('log', '--all', '--format=%H%x09%an%x09%ae%x09%cn%x09%ce%x09%s%x09%b')

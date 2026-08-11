@@ -5,8 +5,8 @@ These original development assets are temporary and are intended to be replaced 
 ## Files
 
 - `temporal_index_closed_source.png`: transparent high-resolution closed-book source.
-- `temporal_index_open_source.png`: transparent high-resolution open-book source.
-- Runtime 64×64 textures live under `src/main/resources/assets/temporal_index/textures/item/`.
+- `temporal_index_open_source.png`: transparent high-resolution open-book source retained from the earlier prototype; it is not used by the final closed-cover renderer.
+- Runtime textures live under `src/main/resources/assets/temporal_index/textures/item/`. Version 1.0.0 always renders the closed book and places the selected temporal sprite on its cover.
 
 ## Generation
 

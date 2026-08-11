@@ -2,12 +2,14 @@
 
 ## Storage
 
-- The item is a portable book with one reserved slot for temporal shards and one reserved slot for each supported temporal modifier.
+- The item is a portable book with one reserved slot for temporal shards and one reserved slot for each of the 16 supported temporal modifiers.
 - Every slot has a hard cap of 65,000.
 - Slots reject all items except their exact designated shard or relic form.
 - Relics with the same modifier but different durations are not merged.
 - Counts, selection, modifier IDs, and durations persist on the book item.
 - The active book cannot be moved while its menu is open.
+
+The inventory lays out the relics as two rows of eight. The shard slot sits to their left, centered vertically between those two rows.
 
 ## Selection and rendering
 
@@ -15,8 +17,11 @@
 - Scrolling wraps in both directions.
 - Scroll packets contain only a direction; the server derives the selected slot from authoritative book data.
 - Removing or consuming the final selected item advances upward to the next occupied slot.
-- An empty book renders closed. A book containing shards or relics renders open.
-- The selected item's Vault-owned sprite is rendered over the open book.
+- The book always uses its closed-cover model.
+- The selected item's Vault-owned sprite is transformed onto the front cover in GUI, first-person, third-person, item-frame, and dropped-item contexts.
+- An empty book has no cover sprite.
+- GUI counts at or above 99 render as `99+`; hovering the slot exposes the exact quantity.
+- The book tooltip lists occupied entries with their localized short names and exact quantities.
 
 ## Interaction
 

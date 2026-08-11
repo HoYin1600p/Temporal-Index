@@ -2,11 +2,13 @@
 
 Temporal Index has only three runtime dependencies: Minecraft, Forge, and `the_vault`. Wold's Vaults and the other inspected reference mods are not required.
 
+The mod must be installed on both the client and server. Client code owns its custom screen and item rendering; server-authoritative code owns storage, transfer, selection, pickup, shard routing, and activation.
+
 The `the_vault` dependency is intentionally constrained by mod ID rather than a pack-specific release number. Vault reports versions such as `1.18.2-20.0.3-remastered.6909`, which are not meaningfully ordered against upstream-style `3.21.x` labels by Forge's Maven version-range rules. Compatibility is instead verified against the concrete jars below.
 
 ## CMA matrix
 
-On 2026-08-10 the source compiled successfully against every distinct active `the_vault` jar in the five CMA-labelled Prism instances:
+For the 1.0.0 release on 2026-08-10, the source compiled successfully against every distinct active `the_vault` jar in the five CMA-labelled Prism instances:
 
 | CMA instance | Vault jar | SHA-256 prefix | Result |
 | --- | --- | --- | --- |
@@ -16,6 +18,16 @@ On 2026-08-10 the source compiled successfully against every distinct active `th
 | CMA Remastered | 20.0.3-remastered.6909 | `53E56FE94AA546F8` | Pass |
 
 The installed `temporal_shard.json` configurations were also inspected. All five use the same ordered set of 16 modifier IDs expected by the book. Durations differ between modifiers in the two CMA Wolds configurations; the book retains the Vault-generated duration with each stored modifier instead of replacing it with a hard-coded duration.
+
+## Dedicated-server verification
+
+The 1.0.0 release JAR was loaded through Forge's dedicated game-test server target with no Wold's Vaults dependency. The verification environment used Minecraft 1.18.2, Vault Hunters 3.20.3.6055, Java 17, and Forge 40.3.12, which is inside the declared `[40.3.11,41)` compatibility range.
+
+Temporal Index completed Forge discovery, construction, common setup, common event-subscriber registration, common mixin application, and mod data-pack registration. The server reached game-test server creation; the borrowed host project then exited because it defines no test batches. No Temporal Index loading error, invalid distribution error, or attempted `net.minecraft.client` class load occurred.
+
+An additional exact-Forge-40.3.11 launch verified FML discovery, server distribution cleaning, and server-side mixin preparation. See [Client/server safety](server-safety.md) for the sided-code audit and server-authority boundaries.
+
+The release JAR was then relaunched in CMA Remastered on exact Forge 40.3.11. A server-authoritative NBT readback verified sneak-scroll selection moving from slot `1` to slot `0` and back to slot `1` through the client-to-server packet.
 
 ## Repeating the check
 
