@@ -3,6 +3,7 @@ package com.hoyin1600p.temporalindex.menu;
 import com.hoyin1600p.temporalindex.registry.TemporalIndexRegistry;
 import com.hoyin1600p.temporalindex.storage.TemporalIndexItemHandler;
 import com.hoyin1600p.temporalindex.storage.TemporalIndexStorage;
+import com.hoyin1600p.temporalindex.storage.TemporalRelics;
 import iskallia.vault.container.oversized.OverSizedSlotContainer;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
@@ -99,6 +100,7 @@ public final class TemporalIndexMenu extends OverSizedSlotContainer {
         }
 
         ItemStack moving = source.getItem();
+        TemporalRelics.sanitizeIdentifiedRelic(moving);
         if (!moveItemStackTo(moving, 0, BOOK_SLOT_COUNT, false)) {
             return ItemStack.EMPTY;
         }

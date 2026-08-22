@@ -30,3 +30,7 @@ Thumbs.db
 
 # Files from Forge MDK
 forge*changelog.txt
+
+# Locally assembled CurseForge upload kits. Public listing text and artwork
+# sources live under docs/curseforge/ and art/release/.
+/release/

@@ -29,6 +29,9 @@ public final class TemporalIndexPickup {
             }
 
             ItemStack remainder = new TemporalIndexItemHandler(candidate).insertItem(targetSlot, incoming, false);
+            if (!remainder.isEmpty() && remainder.hasTag()) {
+                incoming.setTag(remainder.getTag().copy());
+            }
             incoming.setCount(remainder.getCount());
             if (incoming.isEmpty()) {
                 return true;

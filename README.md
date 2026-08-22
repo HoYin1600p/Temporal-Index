@@ -14,6 +14,7 @@ The Index is designed for players who want temporal items available without fill
 - Main-hand activation of the selected shard or relic.
 - Vault-owned shard loot rolls, instant identification, and relic activation.
 - Automatic routing of identified relics into their matching Index slot.
+- Canonical relic NBT on insertion and extraction so equivalent relics from different generation paths merge safely.
 - Safe overflow through normal inventory pickup, another Index, or a drop at the player's feet.
 - A closed-book renderer with the selected item's sprite displayed on its cover in first person, third person, item frames, and dropped-item form.
 - Compact `99+` slot labels with exact quantities available on hover.
@@ -34,7 +35,7 @@ Temporal Index has no runtime dependency on Wold's Vaults, Fruit Sac, Sophistica
 ## Installation
 
 1. Install Minecraft 1.18.2, Forge 40.3.11, and a compatible Vault Hunters pack.
-2. Download `temporal_index-1.0.1.jar` from the GitHub release.
+2. Download `temporal_index-1.0.3.jar` from the GitHub release.
 3. Place the JAR in the pack's `mods` directory on both the client and server.
 4. Start the game and confirm that **Temporal Index** appears in Forge's Mods screen.
 
@@ -86,7 +87,7 @@ Clone the repository, use Java 17, and provide a local `the_vault` JAR:
 .\gradlew.bat build -Pvault_mod_jar="X:\path\to\the_vault.jar"
 ```
 
-The build also discovers Vault Hunters in a small set of local Prism development instances when no override is supplied. The current development JAR is written to `build/libs/temporal_index-1.0.2.jar`.
+The build also discovers Vault Hunters in a small set of local Prism development instances when no override is supplied. The current development JAR is written to `build/libs/temporal_index-1.0.3.jar`.
 
 ### Temporary render calibration editor
 
@@ -119,6 +120,8 @@ For development guidelines, see [CONTRIBUTING.md](CONTRIBUTING.md).
 - [Compatibility verification](docs/compatibility.md)
 - [Client/server safety](docs/server-safety.md)
 - [Reference behavior findings](docs/reference-findings.md)
+- [Version 1.0.3 release notes](docs/releases/1.0.3.md)
+- [Version 1.0.2 release notes](docs/releases/1.0.2.md)
 - [Version 1.0.1 release notes](docs/releases/1.0.1.md)
 - [Version 1.0.0 release notes](docs/releases/1.0.0.md)
 - [Changelog](CHANGELOG.md)

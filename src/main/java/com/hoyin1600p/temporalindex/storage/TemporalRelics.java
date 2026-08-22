@@ -4,7 +4,6 @@ import iskallia.vault.gear.VaultGearState;
 import iskallia.vault.gear.item.IdentifiableItem;
 import iskallia.vault.init.ModItems;
 import iskallia.vault.item.gear.TemporalShardItem;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextComponent;
@@ -16,7 +15,7 @@ import java.util.List;
 
 public final class TemporalRelics {
     public static final int DEFAULT_DURATION = 6000;
-    public static final String LIGHTWEIGHT_IDENTIFIED_TAG = "identified";
+    public static final String LIGHTWEIGHT_IDENTIFIED_TAG = TemporalRelicNbt.IDENTIFIED_TAG;
 
     public static final List<Definition> DEFINITIONS = List.of(
             definition("overpower"),
@@ -54,12 +53,7 @@ public final class TemporalRelics {
             return -1;
         }
 
-        for (int index = 0; index < DEFINITIONS.size(); index++) {
-            if (DEFINITIONS.get(index).modifier().equals(modifier)) {
-                return index;
-            }
-        }
-        return -1;
+        return findDefinition(modifier);
     }
 
     public static boolean isUnidentifiedShard(ItemStack stack) {
@@ -103,16 +97,49 @@ public final class TemporalRelics {
         }
 
         ItemStack stack = new ItemStack(ModItems.TEMPORAL_SHARD, count);
-        TemporalShardItem.setModifierData(stack, definition.modifier(), Math.max(0, duration));
-        sanitizeIdentifiedRelic(stack);
+        stack.setTag(TemporalRelicNbt.createCanonicalTag(
+                definition.modifier(),
+                normalizeDuration(duration)
+        ));
         return stack;
     }
 
-    public static void sanitizeIdentifiedRelic(ItemStack stack) {
-        CompoundTag tag = stack.getOrCreateTag();
-        tag.putBoolean(LIGHTWEIGHT_IDENTIFIED_TAG, true);
-        tag.remove("vaultGearData");
-        tag.remove("clientCache");
+    public static boolean sanitizeIdentifiedRelic(ItemStack stack) {
+        if (!isTemporalItem(stack) || !TemporalShardItem.isIdentified(stack)) {
+            return false;
+        }
+
+        ResourceLocation modifier = TemporalShardItem.getModifier(stack);
+        if (findDefinition(modifier) < 0) {
+            return false;
+        }
+
+        stack.setTag(TemporalRelicNbt.createCanonicalTag(
+                modifier,
+                normalizeDuration(TemporalShardItem.getDuration(stack))
+        ));
+        return true;
+    }
+
+    public static ItemStack sanitizedRelicCopy(ItemStack stack) {
+        ItemStack copy = stack.copy();
+        return sanitizeIdentifiedRelic(copy) ? copy : ItemStack.EMPTY;
+    }
+
+    private static int findDefinition(ResourceLocation modifier) {
+        if (modifier == null) {
+            return -1;
+        }
+        for (int index = 0; index < DEFINITIONS.size(); index++) {
+            if (DEFINITIONS.get(index).modifier().equals(modifier)) {
+                return index;
+            }
+        }
+        return -1;
+    }
+
+    private static int normalizeDuration(int duration) {
+        return duration > 0 ? duration : DEFAULT_DURATION;
     }
 
     public record Definition(ResourceLocation modifier) {

@@ -19,6 +19,8 @@ For the 1.0.0 release on 2026-08-10, the source compiled successfully against ev
 
 The installed `temporal_shard.json` configurations were also inspected. All five use the same ordered set of 16 modifier IDs expected by the book. Durations differ between modifiers in the two CMA Wolds configurations; the book retains the Vault-generated duration with each stored modifier instead of replacing it with a hard-coded duration.
 
+On 2026-08-21, version 1.0.3's canonical Temporal Relic NBT implementation compiled successfully against the same four distinct Vault Hunters builds. The canonical representation retains the modifier and positive Vault-provided duration while discarding generation-source and cached gear data when a valid identified relic enters the Index.
+
 On 2026-08-11, the 1.0.2 development JAR was regression-tested against the exact CMA Remastered `20.0.3-remastered.6909` JAR after a production startup report exposed an invalid mixin target. Temporal Index no longer injects into the inherited `TemporalShardItem.getState` interface method. CMA Remastered reached its existing Vault world with both mods loaded, no Temporal Index mixin/application error in `latest.log`, and an existing populated Index still resolving its selected Overpower relic name correctly.
 
 ## Optional Wold's Vaults compatibility

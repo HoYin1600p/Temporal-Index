@@ -6,6 +6,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+## [1.0.3] - 2026-08-21
+
+### Changed
+
+- Canonicalized every identified Temporal Relic accepted by the Index to the minimal `identified`, `modifier`, and `duration` NBT required for Vault behavior.
+- Applied canonicalization before manual and shift-click container merging so equivalent relics from different generation paths can share their reserved slot.
+- Applied the same canonical representation to shard-generated relics, automatic pickup, partial insertion remainders, and relics extracted from the Index.
+- Preserved positive Vault-provided durations and continued to use the 6,000-tick fallback when a relic has no valid duration.
+- Kept the implementation independent of Wold's Vaults; Vault Hunters remains the only required content mod.
+
 ## [1.0.2] - 2026-08-11
 
 ### Render calibration tooling
@@ -65,7 +75,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 - Book textures and models are functional placeholder assets intended to be replaced by commissioned artwork.
 - Compatibility depends on Vault Hunters' temporal item interfaces remaining compatible with the tested builds.
 
-[Unreleased]: https://github.com/HoYin1600p/Temporal-Index/compare/v1.0.2...HEAD
+[Unreleased]: https://github.com/HoYin1600p/Temporal-Index/compare/v1.0.3...HEAD
+[1.0.3]: https://github.com/HoYin1600p/Temporal-Index/compare/v1.0.2...v1.0.3
 [1.0.2]: https://github.com/HoYin1600p/Temporal-Index/compare/v1.0.1...v1.0.2
 [1.0.1]: https://github.com/HoYin1600p/Temporal-Index/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/HoYin1600p/Temporal-Index/releases/tag/v1.0.0

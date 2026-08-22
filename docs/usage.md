@@ -56,6 +56,8 @@ Hovering the Index itself lists every occupied entry and exact quantity. Names u
 
 ## Data safety
 
-Temporal Index stores compact modifier, duration, count, and selection data on the book. Reconstructed relics omit expensive cached Vault Gear data while retaining the Vault-owned information required for behavior.
+Temporal Index stores compact modifier, duration, count, and selection data on the book. When a valid identified relic is offered to the Index, it is reduced to a canonical representation containing only its identification marker, modifier, and duration. This happens before manual and shift-click merge comparisons as well as through automatic pickup and shard-generated routing. Relics reconstructed or removed from the Index retain that same clean representation.
+
+Positive Vault-provided durations are preserved. A missing or invalid duration uses the 6,000-tick fallback. Other NBT—including generation-source markers, Vault Gear data, client caches, custom names, and unrelated third-party tags—is intentionally discarded.
 
 The container validates slot contents and menu transfers on the server. The active Index cannot be moved while its own menu is open. These rules are intended to prevent shift-click and carried-stack duplication paths.

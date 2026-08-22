@@ -1,6 +1,7 @@
 package com.hoyin1600p.temporalindex.menu;
 
 import com.hoyin1600p.temporalindex.storage.TemporalIndexStorage;
+import com.hoyin1600p.temporalindex.storage.TemporalRelics;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
@@ -21,5 +22,11 @@ public final class TemporalIndexSlot extends SlotItemHandler {
     @Override
     public int getMaxStackSize(@NotNull ItemStack stack) {
         return TemporalIndexStorage.MAX_PER_SLOT;
+    }
+
+    @Override
+    public @NotNull ItemStack safeInsert(@NotNull ItemStack stack, int increment) {
+        TemporalRelics.sanitizeIdentifiedRelic(stack);
+        return super.safeInsert(stack, increment);
     }
 }

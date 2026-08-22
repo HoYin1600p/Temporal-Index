@@ -27,15 +27,23 @@ public final class TemporalIndexItemHandler implements IItemHandlerModifiable {
             return stack;
         }
 
-        int stored = TemporalIndexStorage.getCount(book, slot);
-        if (slot != TemporalIndexStorage.SHARD_SLOT && stored > 0
-                && TemporalIndexStorage.getDuration(book, slot) != TemporalIndexStorage.durationFor(stack)) {
-            return stack;
+        ItemStack insertionStack = stack;
+        if (slot != TemporalIndexStorage.SHARD_SLOT) {
+            insertionStack = TemporalRelics.sanitizedRelicCopy(stack);
+            if (insertionStack.isEmpty()) {
+                return stack;
+            }
         }
 
-        int accepted = Math.min(TemporalIndexStorage.MAX_PER_SLOT - stored, stack.getCount());
+        int stored = TemporalIndexStorage.getCount(book, slot);
+        if (slot != TemporalIndexStorage.SHARD_SLOT && stored > 0
+                && TemporalIndexStorage.getDuration(book, slot) != TemporalIndexStorage.durationFor(insertionStack)) {
+            return insertionStack;
+        }
+
+        int accepted = Math.min(TemporalIndexStorage.MAX_PER_SLOT - stored, insertionStack.getCount());
         if (accepted <= 0) {
-            return stack;
+            return insertionStack;
         }
 
         if (!simulate) {
@@ -43,14 +51,14 @@ public final class TemporalIndexItemHandler implements IItemHandlerModifiable {
                     book,
                     slot,
                     stored + accepted,
-                    slot == TemporalIndexStorage.SHARD_SLOT ? 0 : TemporalIndexStorage.durationFor(stack)
+                    slot == TemporalIndexStorage.SHARD_SLOT ? 0 : TemporalIndexStorage.durationFor(insertionStack)
             );
         }
 
-        if (accepted == stack.getCount()) {
+        if (accepted == insertionStack.getCount()) {
             return ItemStack.EMPTY;
         }
-        ItemStack remainder = stack.copy();
+        ItemStack remainder = insertionStack.copy();
         remainder.shrink(accepted);
         return remainder;
     }
